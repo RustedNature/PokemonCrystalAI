@@ -17,8 +17,7 @@ Well there are some simple arguments that i have for preferring C# over Python:
 - looks much more cleaner
 - It's C#
 
-# Its a huge project!
-Yes I know, my goal is mainly to learn new things. 
+ 
 
 # Progress
 
