@@ -1,6 +1,6 @@
 ﻿using TorchSharp;
 
-namespace PokeTorchAi;
+namespace PokeTorchAi.Ai;
 
 public class ExperienceReplay(int capacity)
 {
