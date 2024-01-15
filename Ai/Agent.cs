@@ -44,6 +44,8 @@ public class Agent(
         return action;
     }
 
+    
+
     public void UpdateModel()
     {
         using var optimizer = torch.optim.Adam(_model.parameters());
@@ -51,6 +53,7 @@ public class Agent(
         var experiences = _replayMemory.Sample(batchSize);
         foreach (var (state, action, reward, nextState) in experiences)
         {
+            
             var currentQ = _model.forward(state.cuda())[0, action];
             var maxNextQ = _targetModel.forward(nextState.cuda()).max().item<float>();
             var expectedQ = reward + (discountFactor * maxNextQ);
@@ -58,6 +61,7 @@ public class Agent(
             var loss = torch.nn.functional.mse_loss(currentQ.cuda(), torch.tensor(expectedQ).cuda());
             loss.backward();
         }
+
         optimizer.step();
         epsilon = Math.Max(minEpsilon, epsilon * epsilonDecay);
     }
