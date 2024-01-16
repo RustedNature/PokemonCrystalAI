@@ -16,6 +16,10 @@ public class ExperienceReplay(int capacity)
         _memory.Add((state, action, reward, nextState));
     }
 
+    public int GetMemoryCount()
+    {
+        return _memory.Count;
+    }
     public IEnumerable<(torch.Tensor state, int action, float reward, torch.Tensor nextState)> Sample(int batchSize)
     {
         var indices = Enumerable.Range(0, _memory.Count).OrderBy(x => _rng.Next()).Take(batchSize);
