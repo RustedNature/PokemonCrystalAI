@@ -54,6 +54,19 @@ class Program
         }
     }
     
+    private static void StartPyBoy()
+    {
+        Process process = new Process();
+
+        // Set the process start info
+        ProcessStartInfo startInfo = new ProcessStartInfo();
+        startInfo.FileName = "python.exe";
+        startInfo.Arguments = @".\PyBoyRun.py";
+        startInfo.WorkingDirectory = @".\PyBoyInteract\Python\";
+        // Start the process
+        process.StartInfo = startInfo;
+        process.Start();
+    }
     
     private static torch.Tensor CropAndNormalize(byte[] stateImage)
     {

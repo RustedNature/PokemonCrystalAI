@@ -6,8 +6,10 @@ from MemoryAddresses import MemoryAddresses
 from pyboy import PyBoy, WindowEvent
 from io import BytesIO
 
-pyboy = PyBoy(r"C:\Users\Nico\Desktop\BizHawk-2.9.1-win-x64\Pokemon - Kristall-Edition (Germany).gbc")
+pyboy = PyBoy(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc")
 pyboy.set_emulation_speed(0)
+with open(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc.state", "rb") as state_file:
+    pyboy.load_state(state_file)
 
 memory_value_list = [MemoryValue(MemoryAddresses.MapBank),
                      MemoryValue(MemoryAddresses.MapNumber),
@@ -42,10 +44,8 @@ def read_memory():
 
 
 def convert_image_to_bytes():
-    img = pyboy.screen_image()
-    byte_arr = BytesIO()
-    img.save(byte_arr, format='PNG')
-    return byte_arr.getvalue()
+    img = pyboy.screen_image().tobytes()
+    return img
 
 
 def move(movement, pyboym: PyBoy):
@@ -59,20 +59,28 @@ def move(movement, pyboym: PyBoy):
     pyboym.send_input(WindowEvent.RELEASE_BUTTON_SELECT)
     if movement == 0:
         pyboym.send_input(WindowEvent.PRESS_ARROW_UP)
+        print("Up")
     elif movement == 1:
         pyboym.send_input(WindowEvent.PRESS_ARROW_DOWN)
+        print("Down")
     elif movement == 2:
         pyboym.send_input(WindowEvent.PRESS_ARROW_LEFT)
+        print("Left")
     elif movement == 3:
         pyboym.send_input(WindowEvent.PRESS_ARROW_RIGHT)
+        print("Right")
     elif movement == 4:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_A)
+        print("A")
     elif movement == 5:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_B)
+        print("B")
     elif movement == 6:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_START)
+        print("Start")
     elif movement == 7:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_SELECT)
+        print("Select")
 
 
 def get_encoded_mem_vals():
@@ -86,7 +94,7 @@ if __name__ == "__main__":
 
     while True:
         pyboy.tick()
-        if  pyboy.frame_count % 5 == 0:
+        if pyboy.frame_count % 5 == 0:
             read_memory()
             pipe.send_image_to_cs(convert_image_to_bytes())
             pipe.send_mem_vals_to_cs(get_encoded_mem_vals())
