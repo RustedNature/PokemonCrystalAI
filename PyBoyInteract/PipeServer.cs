@@ -10,6 +10,7 @@ public class PipeServer
 
     public void StartServer()
     {
+
         Console.WriteLine("Waiting for client connection...");
         _server!.WaitForConnection();
         Console.WriteLine("Client connected.");
@@ -17,7 +18,7 @@ public class PipeServer
 
     public void SendMovementData(long movement)
     {
-        
+
         _server!.Write(Encoding.UTF8.GetBytes(movement.ToString()));
         _server.Flush();
     }
