@@ -1,18 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Drawing.Imaging;
-using System.Numerics;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PokeTorchAi.Ai;
 using PokeTorchAi.Pokemon.Classes;
 using PokeTorchAi.PyBoyInteract;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-using Tensorboard;
+using System.Diagnostics;
+using System.Text;
 using TorchSharp;
-using JsonSerializer = System.Text.Json.JsonSerializer;
-using Rectangle = System.Drawing.Rectangle;
 
 
 namespace PokeTorchAi;
@@ -24,23 +16,31 @@ class Program
 
     private static void Main(string[] args)
     {
+        var rewardManager = new RewardManager();
         var rng = new Random();
-        var agent = new Agent(NumActions, batchSize: 16, discountFactor: 0.99f, epsilon: 1.0f, epsilonDecay: 0.995f,
+        var agent = new Agent(NumActions, batchSize: 8, discountFactor: 0.99f, epsilon: 1.0f, epsilonDecay: 0.9995f,
             minEpsilon: 0.01f);
-        agent.LoadModel();
+        if (agent.LoadModel())
+        {
+            Console.WriteLine("Existing model loaded");
+        }
 
 
-        var memoryValues = new List<MemoryValue>();
         var pipeServer = new PipeServer();
         torch.Tensor? imageCurrent = null;
         var firstRun = true;
+        StartPyBoy();
         pipeServer.StartServer();
+
+        var epoch = 0;
         while (true)
         {
             var imageBefore = imageCurrent;
             var byteImageCurrent = GetCurrentImageAsBytes(pipeServer);
             imageCurrent = CropAndNormalize(byteImageCurrent);
-            memoryValues = GetCurrentMemoryValues(pipeServer);
+
+            rewardManager.RefreshMemory(GetCurrentMemoryValues(pipeServer));
+
             var lastMovement = agent.SelectAction(imageCurrent);
             pipeServer.SendMovementData(lastMovement);
 
@@ -49,11 +49,16 @@ class Program
                 firstRun = false;
                 continue;
             }
-            agent.UpdateExperienceMemory(imageBefore!,(int)lastMovement,0.0f,imageCurrent);
+            agent.UpdateExperienceMemory(imageBefore!, (int)lastMovement, rewardManager.GetReward(), imageCurrent);
             agent.UpdateModel();
+            Console.WriteLine(++epoch);
+            if (epoch % 1_000 == 0)
+            {
+                agent.SaveModel();
+            }
         }
     }
-    
+
     private static void StartPyBoy()
     {
         Process process = new Process();
@@ -67,15 +72,15 @@ class Program
         process.StartInfo = startInfo;
         process.Start();
     }
-    
+
     private static torch.Tensor CropAndNormalize(byte[] stateImage)
     {
-        var transform = 
+        var transform =
             torchvision.transforms.Compose([
             torchvision.transforms.CenterCrop(144, 144),
-            torchvision.transforms.Grayscale()
+                torchvision.transforms.Grayscale()
         ]);
-        return transform.call(torch.tensor(stateImage,torch.ScalarType.Float32).view(3,160,144));
+        return transform.call(torch.tensor(stateImage, torch.ScalarType.Float32).view(3, 160, 144));
     }
 
 
