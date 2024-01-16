@@ -1,1 +1,8 @@
-﻿/.git   
+﻿/.git
+/bin
+/obj
+/PyBoyInteract/Python/ROM
+/.idea
+/.vs
+/PyBoyInteract/Python/__pycache__
+/Folder.DotSettings.user
