@@ -24,12 +24,14 @@ Currently implemented:
 - ExperienceReplay
 - Basic Agent
 - Basic Cnn-Model
-- Random data for the model 
-
-# What's coming? (maybe)
-- SharedMemory for [PyBoy](https://github.com/Baekalfen/PyBoy) (a great Game Boy emulator) for reading memory values and 
-as emulator  
-If this is to slow i would swap to [BizHawk](https://github.com/TASEmulators/BizHawk) or another emulator
+- ~~Random data for the model~~
+- ~~SharedMemory for [PyBoy](https://github.com/Baekalfen/PyBoy) (a great Game Boy emulator) for reading memory values and 
+as emulator. If this is to slow i would swap to [BizHawk](https://github.com/TASEmulators/BizHawk) or another emulator~~ 
+I using now Pipes and PyBoy
 - Implementation for a training loop 
 - MemoryReader for keeping track of important values(PyBoy and BizHawk have a MemoryReader, would be the easiest way)
+- RewardManager (not fully)
+
+# What's coming? (maybe)
+- More variable train loops(Only random actions, predict -> random action)
 - Well that's planned for now xD, maybe I get some more ideas as iam coding
