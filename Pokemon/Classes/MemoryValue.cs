@@ -7,9 +7,13 @@ namespace PokeTorchAi.Pokemon.Classes
         public MemoryAddresses MemAddress { get; set; }
         public int MemValue { get; set; }
 
-        public MemoryValue(int memAddress, int memValue)
+        public MemoryValue()
         {
-            MemAddress = (MemoryAddresses)memAddress;
+            
+        }
+        public MemoryValue(MemoryAddresses memAddress, int memValue = 0)
+        {
+            MemAddress = memAddress;
             MemValue = memValue;
         }
     }
