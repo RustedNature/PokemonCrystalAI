@@ -7,14 +7,18 @@ public sealed class PokeAi : Module<Tensor, Tensor>
 {
     private readonly Module<Tensor, Tensor> _features;
     private readonly Module<Tensor, Tensor> _linearLayers;
+    const int FirstConvOutput = 128;
+    const int SecondConvOutput = 64;
+    const int FlatLayerSize = SecondConvOutput * 18 * 18;//18 is the size of the image/features that we want to put in the flat layer
+
 
     public PokeAi(string name, int numActions, int inputChannels) : base(name)
     {
         _features = Sequential(
-            ("c1", Conv2d(inputChannels, 128, kernelSize: 3, stride: 2, padding: 1)),
+            ("c1", Conv2d(inputChannels, FirstConvOutput, kernelSize: 3, stride: 2, padding: 1)),
             ("r1", ReLU(inplace: true)),
             ("mp1", MaxPool2d(kernelSize: new long[] { 2, 2 })),
-            ("c2", Conv2d(128, 64, kernelSize: 3, padding: 1)),
+            ("c2", Conv2d(FirstConvOutput, SecondConvOutput, kernelSize: 3, padding: 1)),
             ("r2", ReLU(inplace: true)),
             ("mp2", MaxPool2d(kernelSize: new long[] { 2, 2 }))
         );
@@ -22,13 +26,13 @@ public sealed class PokeAi : Module<Tensor, Tensor>
 
         _linearLayers = Sequential(
             ("d1", Dropout()),
-            ("l1", Linear(18 * 18 * 64, 1024)),
+            ("l1", Linear(FlatLayerSize, 512)),
             ("r1", ReLU(inplace: true)),
             ("d2", Dropout()),
-            ("l2", Linear(1024, 562)),
+            ("l2", Linear(512, 64)),
             ("r3", ReLU(inplace: true)),
             ("d3", Dropout()),
-            ("l3", Linear(562, numActions))
+            ("l3", Linear(64, numActions))
         );
         RegisterComponents();
     }
@@ -36,7 +40,7 @@ public sealed class PokeAi : Module<Tensor, Tensor>
     public override Tensor forward(Tensor input)
     {
         var f = _features.forward(input);
-        var v = f.view([-1, 64 * 18 * 18]);
+        var v = f.view([-1, FlatLayerSize]);
         var l = _linearLayers.forward(v);
 
         return l;
