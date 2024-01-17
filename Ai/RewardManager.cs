@@ -77,6 +77,15 @@ public class RewardManager
         Calculate2ByteValues();
     }
 
+    public int GetHoursPlayed()
+    {
+        return _hoursPlayTimeInGame;
+    }
+    public int GetMinutesPlayed()
+    {
+        return _minutesPlayTimeInGame;
+    }
+
     private void Calculate2ByteValues()
     {
         var hpPokemon1Hp = new byte[] { _hpOfPokemon1Byte1, _hpOfPokemon1Byte2 };
