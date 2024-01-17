@@ -1,4 +1,3 @@
-
 using TorchSharp;
 
 
@@ -54,7 +53,7 @@ public class Agent(
         withNoGrad.Dispose();
         _model.train();
         Console.WriteLine("PREDICT");
-    
+
 
         return qValues.argmax().item<long>();
     }
@@ -76,7 +75,7 @@ public class Agent(
         var experiences = _replayMemory.Sample(batchSize);
         foreach (var (state, action, reward, nextState) in experiences)
         {
-            
+
             var currentQ = _model.forward(state.cuda())[0, action];
             var maxNextQ = _targetModel.forward(nextState.cuda()).max().item<float>();
             var expectedQ = reward + (discountFactor * maxNextQ);
@@ -87,7 +86,6 @@ public class Agent(
 
         optimizer.step();
         epsilon = Math.Max(minEpsilon, epsilon * epsilonDecay);
-        Console.WriteLine(epsilon);
         ++_updateCounter;
         UpdateTargetModel();
     }
@@ -100,12 +98,10 @@ public class Agent(
 
         cpuTargetModel.load_state_dict(cpuModel.state_dict());
 
-        Console.WriteLine("Model parameters copied.");
 
         _model = cpuModel.cuda();
         _targetModel = cpuTargetModel.cuda();
 
-        Console.WriteLine("Models moved back to GPU.");
     }
 
     public void UpdateExperienceMemory(torch.Tensor state, int action, float reward, torch.Tensor nextState)
