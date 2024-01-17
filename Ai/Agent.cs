@@ -45,8 +45,25 @@ public class Agent(
 
         return action;
     }
+    public long SelectPredictedActionOnly(torch.Tensor stateImage)
+    {
 
+        _model.eval();
+        var withNoGrad = torch.no_grad();
+        var qValues = _model.forward(stateImage.cuda());
+        withNoGrad.Dispose();
+        _model.train();
+        Console.WriteLine("PREDICT");
     
+
+        return qValues.argmax().item<long>();
+    }
+
+    public int GetMemoryCount()
+    {
+        return _replayMemory.GetMemoryCount();
+    }
+
 
     public void UpdateModel()
     {
