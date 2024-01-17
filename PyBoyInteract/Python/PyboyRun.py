@@ -59,28 +59,28 @@ def move(movement, pyboym: PyBoy):
     pyboym.send_input(WindowEvent.RELEASE_BUTTON_SELECT)
     if movement == 0:
         pyboym.send_input(WindowEvent.PRESS_ARROW_UP)
-        print("Up")
+        #print("Up")
     elif movement == 1:
         pyboym.send_input(WindowEvent.PRESS_ARROW_DOWN)
-        print("Down")
+        #print("Down")
     elif movement == 2:
         pyboym.send_input(WindowEvent.PRESS_ARROW_LEFT)
-        print("Left")
+        #print("Left")
     elif movement == 3:
         pyboym.send_input(WindowEvent.PRESS_ARROW_RIGHT)
-        print("Right")
+        #print("Right")
     elif movement == 4:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_A)
-        print("A")
+        #print("A")
     elif movement == 5:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_B)
-        print("B")
+        #print("B")
     elif movement == 6:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_START)
-        print("Start")
+        #print("Start")
     elif movement == 7:
         pyboym.send_input(WindowEvent.PRESS_BUTTON_SELECT)
-        print("Select")
+        #print("Select")
 
 
 def get_encoded_mem_vals():
