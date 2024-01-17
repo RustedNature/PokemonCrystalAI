@@ -184,6 +184,7 @@ public class RewardManager
         oneTimeReward += NeuborkiaOutsideReward();
         oneTimeReward += NeuborkiaProfHouseReward();
         oneTimeReward += NeuborkiaRoute29Reward();
+        oneTimeReward += PokemonInTeamLevelSum();
 
         return oneTimeReward;
     }
@@ -193,7 +194,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Route29 && _gotNeuborkiaRoute29Reward is false )
         {
             _gotNeuborkiaRoute29Reward = true;
-            return 2;
+            return DefaultReward;
         }
 
         return 0;
@@ -204,7 +205,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaProfReward is false )
         {
             _gotNeuborkiaProfReward = true;
-            return 2;
+            return DefaultReward;
         }
 
         return 0;
@@ -215,7 +216,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaOutsideReward is false )
         {
             _gotNeuborkiaOutsideReward = true;
-            return 2;
+            return DefaultReward;
         }
 
         return 0;
@@ -226,7 +227,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.LivingRoom && _gotNeuborkiaLivingRoomReward is false)
         {
             _gotNeuborkiaLivingRoomReward = true;
-            return 2;
+            return DefaultReward;
         }
 
         return 0;
