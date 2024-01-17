@@ -5,34 +5,42 @@ namespace PokeTorchAi.Ai;
 
 public class RewardManager
 {
-    private List<MemoryValue> _currentMemoryValues;
+    private const float DefaultReward = 10;
+    private const int MaxPokemonLevel = 100;
+    private List<MemoryValue>? _currentMemoryValues;
    
-    private int _levelOfPokemon1 = 0;
+    private int _lastLevelOfPokemon1 = 0;
+    private int _currentLevelOfPokemon1 = 0;
     private byte _hpOfPokemon1Byte1 = 0;
     private byte _hpOfPokemon1Byte2 = 0;
     private int _hpOfPokemon1 = 0;
     
-    private int _levelOfPokemon2 = 0;
+    private int _lastLevelOfPokemon2 = 0;
+    private int _currentLevelOfPokemon2 = 0;
     private byte _hpOfPokemon2Byte1 = 0;
     private byte _hpOfPokemon2Byte2 = 0;
     private int _hpOfPokemon2 = 0;
     
-    private int _levelOfPokemon3 = 0;
+    private int _lastLevelOfPokemon3 = 0;
+    private int _currentLevelOfPokemon3 = 0;
     private byte _hpOfPokemon3Byte1 = 0;
     private byte _hpOfPokemon3Byte2 = 0;
     private int _hpOfPokemon3 = 0;
     
-    private int _levelOfPokemon4 = 0;
+    private int _lastLevelOfPokemon4 = 0;
+    private int _currentLevelOfPokemon4 = 0;
     private byte _hpOfPokemon4Byte1 = 0;
     private byte _hpOfPokemon4Byte2 = 0;
     private int _hpOfPokemon4 = 0;
     
-    private int _levelOfPokemon5 = 0;
+    private int _lastLevelOfPokemon5 = 0;
+    private int _currentLevelOfPokemon5 = 0;
     private byte _hpOfPokemon5Byte1 = 0;
     private byte _hpOfPokemon5Byte2 = 0;
     private int _hpOfPokemon5 = 0;
     
-    private int _levelOfPokemon6 = 0;
+    private int _lastLevelOfPokemon6 = 0;
+    private int _currentLevelOfPokemon6 = 0;
     private byte _hpOfPokemon6Byte1 = 0;
     private byte _hpOfPokemon6Byte2 = 0;
     private int _hpOfPokemon6 = 0;
