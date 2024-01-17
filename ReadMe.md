@@ -24,7 +24,7 @@ Currently implemented:
 - ExperienceReplay
 - Basic Agent
 - Basic Cnn-Model
-- ~~Random data for the model~~
+- ~~Random data for the model~~ Acutal Pokemon image data
 - ~~SharedMemory for [PyBoy](https://github.com/Baekalfen/PyBoy) (a great Game Boy emulator) for reading memory values and 
 as emulator. If this is to slow i would swap to [BizHawk](https://github.com/TASEmulators/BizHawk) or another emulator~~ 
 I using now Pipes and PyBoy
