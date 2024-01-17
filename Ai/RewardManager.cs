@@ -101,6 +101,19 @@ public class RewardManager
         _hoursPlayTimeInGame = BitConverter.ToInt16(hoursPlayTime, 0);
     }
 
+    public void ResetRewards()
+    {
+        _gotNeuborkiaLivingRoomReward = false;
+        _gotNeuborkiaOutsideReward = false;
+        _gotNeuborkiaRoute29Reward = false;
+        _gotNeuborkiaProfReward = false;
+        _lastLevelOfPokemon1 = 0;
+        _lastLevelOfPokemon2 = 0;
+        _lastLevelOfPokemon3 = 0;
+        _lastLevelOfPokemon4 = 0;
+        _lastLevelOfPokemon5 = 0;
+        _lastLevelOfPokemon6 = 0;
+    }
     public float GetReward()
     {
         float reward = 0;
