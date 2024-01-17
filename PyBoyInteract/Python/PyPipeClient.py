@@ -15,7 +15,7 @@ class PyPipeClient:
             0,  # Default attributes
             None  # No template file
         )
-        self.buffer_size = 1
+        self.buffer_size = 1024
 
     def read_movement_from_cs(self) -> int:
         (code, movement_bytes) = win32file.ReadFile(self.handle, self.buffer_size)
@@ -28,3 +28,10 @@ class PyPipeClient:
     def send_mem_vals_to_cs(self, mem_vals):
         win32file.WriteFile(self.handle, mem_vals)
         win32file.FlushFileBuffers(self.handle)
+
+    def read_reset_from_cs(self) -> bool:
+        (code, content) = win32file.ReadFile(self.handle, self.buffer_size)
+        if content.decode() == "1":
+            return True
+        else:
+            return False
