@@ -191,7 +191,7 @@ public class RewardManager
 
     private float NeuborkiaRoute29Reward()
     {
-        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Route29 && _gotNeuborkiaRoute29Reward is false )
+        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Route29 && _gotNeuborkiaRoute29Reward is false)
         {
             _gotNeuborkiaRoute29Reward = true;
             return DefaultReward;
@@ -202,7 +202,7 @@ public class RewardManager
 
     private float NeuborkiaProfHouseReward()
     {
-        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaProfReward is false )
+        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaProfReward is false)
         {
             _gotNeuborkiaProfReward = true;
             return DefaultReward;
@@ -213,7 +213,7 @@ public class RewardManager
 
     private float NeuborkiaOutsideReward()
     {
-        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaOutsideReward is false )
+        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaOutsideReward is false)
         {
             _gotNeuborkiaOutsideReward = true;
             return DefaultReward;
