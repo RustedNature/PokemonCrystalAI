@@ -26,7 +26,7 @@ public class Agent(
 
     public long SelectAction(torch.Tensor stateImage)
     {
-        long action = 0;
+        long action;
         if (Rng.NextDouble() > epsilon)
         {
             _model.eval();
