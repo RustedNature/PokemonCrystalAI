@@ -40,4 +40,10 @@ public class PipeServer
         _server!.Close();
         _server!.Dispose();
     }
+
+    internal void SendReset(int reset)
+    {
+        _server!.Write(Encoding.UTF8.GetBytes(reset.ToString()));
+        _server!.Flush();
+    }
 }
