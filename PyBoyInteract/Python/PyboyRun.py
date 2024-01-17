@@ -6,10 +6,7 @@ from MemoryAddresses import MemoryAddresses
 from pyboy import PyBoy, WindowEvent
 from io import BytesIO
 
-pyboy = PyBoy(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc")
-pyboy.set_emulation_speed(0)
-with open(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc.state", "rb") as state_file:
-    pyboy.load_state(state_file)
+
 
 memory_value_list = [MemoryValue(MemoryAddresses.MapBank),
                      MemoryValue(MemoryAddresses.MapNumber),
