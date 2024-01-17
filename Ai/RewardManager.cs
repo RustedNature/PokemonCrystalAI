@@ -8,55 +8,55 @@ public class RewardManager
     private const float DefaultReward = 10;
     private const int MaxPokemonLevel = 100;
     private List<MemoryValue>? _currentMemoryValues;
-   
+
     private int _lastLevelOfPokemon1 = 0;
     private int _currentLevelOfPokemon1 = 0;
     private byte _hpOfPokemon1Byte1 = 0;
     private byte _hpOfPokemon1Byte2 = 0;
     private int _hpOfPokemon1 = 0;
-    
+
     private int _lastLevelOfPokemon2 = 0;
     private int _currentLevelOfPokemon2 = 0;
     private byte _hpOfPokemon2Byte1 = 0;
     private byte _hpOfPokemon2Byte2 = 0;
     private int _hpOfPokemon2 = 0;
-    
+
     private int _lastLevelOfPokemon3 = 0;
     private int _currentLevelOfPokemon3 = 0;
     private byte _hpOfPokemon3Byte1 = 0;
     private byte _hpOfPokemon3Byte2 = 0;
     private int _hpOfPokemon3 = 0;
-    
+
     private int _lastLevelOfPokemon4 = 0;
     private int _currentLevelOfPokemon4 = 0;
     private byte _hpOfPokemon4Byte1 = 0;
     private byte _hpOfPokemon4Byte2 = 0;
     private int _hpOfPokemon4 = 0;
-    
+
     private int _lastLevelOfPokemon5 = 0;
     private int _currentLevelOfPokemon5 = 0;
     private byte _hpOfPokemon5Byte1 = 0;
     private byte _hpOfPokemon5Byte2 = 0;
     private int _hpOfPokemon5 = 0;
-    
+
     private int _lastLevelOfPokemon6 = 0;
     private int _currentLevelOfPokemon6 = 0;
     private byte _hpOfPokemon6Byte1 = 0;
     private byte _hpOfPokemon6Byte2 = 0;
     private int _hpOfPokemon6 = 0;
-    
+
     private int _numberOfPokemonInTeam = 0;
-    
+
     private int _mapBank = 0;
     private int _mapNumber = 0;
-    
+
     private int _battleType = 0;
-    
+
     private int _minutesPlayTimeInGame = 0;
     private int _hoursPlayTimeInGameByte1 = 0;
     private int _hoursPlayTimeInGameByte2 = 0;
     private int _hoursPlayTimeInGame = 0;
-    
+
     private bool _gotNeuborkiaLivingRoomReward = false;
     private bool _gotNeuborkiaOutsideReward = false;
     private bool _gotNeuborkiaRoute29Reward = false;
@@ -64,7 +64,7 @@ public class RewardManager
 
     public RewardManager()
     {
-        
+
     }
 
     public void RefreshMemory(List<MemoryValue> memoryValues)
@@ -90,22 +90,22 @@ public class RewardManager
     {
         var hpPokemon1Hp = new byte[] { _hpOfPokemon1Byte1, _hpOfPokemon1Byte2 };
         _hpOfPokemon1 = BitConverter.ToInt16(hpPokemon1Hp, 0);
-        
+
         var hpPokemon2Hp = new byte[] { _hpOfPokemon2Byte1, _hpOfPokemon2Byte2 };
         _hpOfPokemon2 = BitConverter.ToInt16(hpPokemon2Hp, 0);
-        
+
         var hpPokemon3Hp = new byte[] { _hpOfPokemon3Byte1, _hpOfPokemon3Byte2 };
         _hpOfPokemon3 = BitConverter.ToInt16(hpPokemon3Hp, 0);
-        
+
         var hpPokemon4Hp = new byte[] { _hpOfPokemon4Byte1, _hpOfPokemon4Byte2 };
         _hpOfPokemon4 = BitConverter.ToInt16(hpPokemon4Hp, 0);
-        
+
         var hpPokemon5Hp = new byte[] { _hpOfPokemon5Byte1, _hpOfPokemon5Byte2 };
         _hpOfPokemon5 = BitConverter.ToInt16(hpPokemon5Hp, 0);
-        
+
         var hpPokemon6Hp = new byte[] { _hpOfPokemon6Byte1, _hpOfPokemon6Byte2 };
         _hpOfPokemon6 = BitConverter.ToInt16(hpPokemon6Hp, 0);
-        
+
         var hoursPlayTime = new byte[] { _hpOfPokemon6Byte1, _hpOfPokemon6Byte2 };
         _hoursPlayTimeInGame = BitConverter.ToInt16(hoursPlayTime, 0);
     }
@@ -128,14 +128,14 @@ public class RewardManager
         float reward = 0;
         reward += CalculatePositiveReward();
         reward += CalculateNegativeReward();
-        
+
         return reward;
     }
 
     private float CalculateNegativeReward()
     {
         float negativeReward = 0;
-        
+
 
         return negativeReward;
     }
