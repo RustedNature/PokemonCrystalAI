@@ -235,7 +235,7 @@ public class RewardManager
 
     private void ReadMemoryValues()
     {
-        foreach (var memoryValue in _currentMemoryValues)
+        foreach (var memoryValue in _currentMemoryValues!)
         {
             switch (memoryValue.MemAddress)
             {
