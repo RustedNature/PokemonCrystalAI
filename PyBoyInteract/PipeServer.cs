@@ -26,7 +26,7 @@ public class PipeServer
     public byte[] GetData()
     {
         Array.Clear(_readBuffer, 0, _readBuffer.Length);
-        var read = _server!.Read(_readBuffer, 0, _readBuffer.Length);
+        _server!.Read(_readBuffer, 0, _readBuffer.Length);
         return _readBuffer;
     }
 
