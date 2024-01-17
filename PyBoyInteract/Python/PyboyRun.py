@@ -90,8 +90,13 @@ def get_encoded_mem_vals():
 
 
 if __name__ == "__main__":
+    while True:
+        try:
     pipe = PyPipeClient()
-
+            pyboy = PyBoy(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc")
+            pyboy.set_emulation_speed(0)
+            with open(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc.state", "rb") as state_file:
+                pyboy.load_state(state_file)
     while True:
         pyboy.tick()
         if pyboy.frame_count % 5 == 0:
@@ -99,4 +104,12 @@ if __name__ == "__main__":
             pipe.send_image_to_cs(convert_image_to_bytes())
             pipe.send_mem_vals_to_cs(get_encoded_mem_vals())
             move(pipe.read_movement_from_cs(), pyboy)
+                    reset = pipe.read_reset_from_cs()
+                    if reset:
+                        with open(r".\ROM\Pokemon - Kristall-Edition (Germany).gbc.state", "rb") as state_file:
+                            pyboy.load_state(state_file)
+                  
+        except :
+            pass
+        
         
