@@ -285,22 +285,22 @@ public class RewardManager
                     _hpOfPokemon6Byte2 = (byte)memoryValue.MemValue;
                     break;
                 case MemoryAddresses.LevelOfPokemon1:
-                    _levelOfPokemon1 = memoryValue.MemValue;
+                    _currentLevelOfPokemon1 = memoryValue.MemValue;
                     break;
                 case MemoryAddresses.LevelOfPokemon2:
-                    _levelOfPokemon2 = memoryValue.MemValue;
+                    _currentLevelOfPokemon2 = memoryValue.MemValue;
                     break;
                 case MemoryAddresses.LevelOfPokemon3:
-                    _levelOfPokemon3 = memoryValue.MemValue;
+                    _currentLevelOfPokemon3 = memoryValue.MemValue;
                     break;
                 case MemoryAddresses.LevelOfPokemon4:
-                    _levelOfPokemon4 = memoryValue.MemValue;
+                    _currentLevelOfPokemon4 = memoryValue.MemValue;
                     break;
                 case MemoryAddresses.LevelOfPokemon5:
-                    _levelOfPokemon5 = memoryValue.MemValue;
+                    _currentLevelOfPokemon5 = memoryValue.MemValue;
                     break;
                 case MemoryAddresses.LevelOfPokemon6:
-                    _levelOfPokemon6 = memoryValue.MemValue;
+                    _currentLevelOfPokemon6 = memoryValue.MemValue;
                     break;
                 case MemoryAddresses.NumberOfPokemonInTeam:
                     _numberOfPokemonInTeam = memoryValue.MemValue;
