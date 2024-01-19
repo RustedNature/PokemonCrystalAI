@@ -6,22 +6,42 @@ namespace PokeTorchAi.Ai;
 
 
 
-public class Agent(
-    int numActions,
-    int batchSize = 1,
-    float discountFactor = 0.99f,
-    float epsilon = 1.0f,
-    float epsilonDecay = 0.995f,
-    float minEpsilon = 0.01f)
+public class Agent
 {
-    private int _updateCounter = 0;
+    private const int InputChannels = 3;
     private const string ModelPath = "MODEL";
     private const string ModelName = "PokeNet.pt";
-    private static readonly Random Rng = new Random();
-    private readonly ExperienceReplay _replayMemory = new ExperienceReplay(100_000);
-    private PokeAi _model = new PokeAi("PokeNetModel", numActions, 1).cuda();
-    private PokeAi _targetModel = new PokeAi("PokeNetTarget", numActions, 1).cuda();
 
+    private float _epsilon;
+    private float _minEpsilon;
+    private float _epsilonDecay;
+    private float _discountFactor;
+    private int _batchSize;
+    private int _numActions;
+    private PokeAi _model;
+    private PokeAi _targetModel;
+    private static readonly Random Rng = new Random();
+    private readonly ExperienceReplay _replayMemory = new ExperienceReplay(250_000);
+    int _updateCounter = 0;
+
+
+    public Agent(int numActions,
+        int batchSize = 1,
+        float discountFactor = 0.99f,
+        float epsilon = 1.0f,
+        float epsilonDecay = 0.995f,
+        float minEpsilon = 0.01f)
+    {
+        _minEpsilon = minEpsilon;
+        _epsilonDecay = epsilonDecay;
+        _discountFactor = discountFactor;
+        _batchSize = batchSize;
+        _epsilon = epsilon;
+        _numActions = numActions;
+
+        _model = new PokeAi("PokeNetModel", numActions, InputChannels).cuda();
+        _targetModel = new PokeAi("PokeNetTarget", numActions, InputChannels).cuda();
+    }
 
     public long SelectAction(torch.Tensor stateImage)
     {
@@ -66,26 +86,26 @@ public class Agent(
 
     public void UpdateModel()
     {
-        if (_replayMemory.GetMemoryCount() < batchSize)
+        if (_replayMemory.GetMemoryCount() < _batchSize)
         {
             return;
         }
         using var optimizer = torch.optim.Adam(_model.parameters());
         optimizer.zero_grad();
-        var experiences = _replayMemory.Sample(batchSize);
+        var experiences = _replayMemory.Sample(_batchSize);
         foreach (var (state, action, reward, nextState) in experiences)
         {
 
             var currentQ = _model.forward(state.cuda())[0, action];
             var maxNextQ = _targetModel.forward(nextState.cuda()).max().item<float>();
-            var expectedQ = reward + (discountFactor * maxNextQ);
+            var expectedQ = reward + (_discountFactor * maxNextQ);
 
             var loss = torch.nn.functional.mse_loss(currentQ.cuda(), torch.tensor(expectedQ).cuda());
             loss.backward();
         }
 
         optimizer.step();
-        epsilon = Math.Max(minEpsilon, epsilon * epsilonDecay);
+        _epsilon = Math.Max(_minEpsilon, _epsilon - _epsilonDecay);
         ++_updateCounter;
         UpdateTargetModel();
     }
@@ -111,9 +131,9 @@ public class Agent(
 
     public void SaveModel()
     {
-        using var fs = new FileStream(ModelPath + "/" + ModelName, FileMode.Create);
+        using var fs = new FileStream(ModelPath + "/" + ModelName + ".MoreConvs3channel", FileMode.Create);
         _model.save(fs);
-        using var fs2 = new FileStream(ModelPath + "/" + ModelName + "Target", FileMode.Create);
+        using var fs2 = new FileStream(ModelPath + "/" + ModelName + "Target.MoreConvs3channel", FileMode.Create);
         _targetModel.save(fs2);
 
     }
@@ -126,11 +146,11 @@ public class Agent(
             return false;
         }
 
-        if (!File.Exists(ModelPath + "/" + ModelName)) return false;
+        if (!File.Exists(ModelPath + "/" + ModelName + ".MoreConvs3channel")) return false;
 
-        using var fs = new FileStream(ModelPath + "/" + ModelName, FileMode.Open);
+        using var fs = new FileStream(ModelPath + "/" + ModelName + ".MoreConvs3channel", FileMode.Open);
         _model.load(fs);
-        using var fs2 = new FileStream(ModelPath + "/" + ModelName + "Target", FileMode.Open);
+        using var fs2 = new FileStream(ModelPath + "/" + ModelName + "Target.MoreConvs3channel", FileMode.Open);
         _targetModel.load(fs2);
         return true;
     }
