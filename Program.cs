@@ -121,7 +121,7 @@ class Program
             restart = false;
             var tensorImageBefore = tensorImageCurrent;
             var byteImageCurrent = GetCurrentImageAsBytes(pipeServer);
-            tensorImageCurrent = CropAndNormalize(byteImageCurrent);
+            tensorImageCurrent = CropAndNormalize(byteImageCurrent).cpu();
 
             rewardManager.RefreshMemory(GetCurrentMemoryValues(pipeServer));
 
@@ -202,9 +202,10 @@ class Program
         var transform =
             torchvision.transforms.Compose([
             torchvision.transforms.CenterCrop(144, 144),
-                torchvision.transforms.Grayscale()
+                torchvision.transforms.ConvertImageDtype(dtype: torch.float32),
+
         ]);
-        return transform.call(torch.tensor(stateImage, torch.ScalarType.Float32).view(3, 160, 144));
+        return transform.call(torch.tensor(stateImage).view(3, 160, 144).cuda()) / 255;
     }
 
 
