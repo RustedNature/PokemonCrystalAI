@@ -156,31 +156,37 @@ public class RewardManager
         {
             _lastLevelOfPokemon1 = _currentLevelOfPokemon1;
             sum += _currentLevelOfPokemon1;
+            Logging.UpdateLogContent($"Pokemon 1 Level: {_currentLevelOfPokemon1} and got {_currentLevelOfPokemon1} reward points");
         }
         if (_currentLevelOfPokemon2 > _lastLevelOfPokemon2 && _currentLevelOfPokemon2 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 2 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon2 = _currentLevelOfPokemon2;
             sum += _currentLevelOfPokemon2;
+            Logging.UpdateLogContent($"Pokemon 2 Level: {_currentLevelOfPokemon2} and got {_currentLevelOfPokemon2} reward points");
         }
         if (_currentLevelOfPokemon3 > _lastLevelOfPokemon3 && _currentLevelOfPokemon3 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 3 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon3 = _currentLevelOfPokemon3;
             sum += _currentLevelOfPokemon3;
+            Logging.UpdateLogContent($"Pokemon 3 Level: {_currentLevelOfPokemon3} and got {_currentLevelOfPokemon3} reward points");
         }
         if (_currentLevelOfPokemon4 > _lastLevelOfPokemon4 && _currentLevelOfPokemon4 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 4 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon4 = _currentLevelOfPokemon4;
             sum += _currentLevelOfPokemon4;
+            Logging.UpdateLogContent($"Pokemon 4 Level: {_currentLevelOfPokemon4} and got {_currentLevelOfPokemon4} reward points");
         }
         if (_currentLevelOfPokemon5 > _lastLevelOfPokemon5 && _currentLevelOfPokemon5 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 5 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon5 = _currentLevelOfPokemon5;
             sum += _currentLevelOfPokemon5;
+            Logging.UpdateLogContent($"Pokemon 5 Level: {_currentLevelOfPokemon5} and got {_currentLevelOfPokemon5} reward points");
         }
         if (_currentLevelOfPokemon6 > _lastLevelOfPokemon6 && _currentLevelOfPokemon6 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 6 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon6 = _currentLevelOfPokemon6;
             sum += _currentLevelOfPokemon6;
+            Logging.UpdateLogContent($"Pokemon 6 Level: {_currentLevelOfPokemon6} and got {_currentLevelOfPokemon6} reward points");
         }
 
         return sum;
@@ -203,6 +209,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Route29 && _gotNeuborkiaRoute29Reward is false)
         {
             _gotNeuborkiaRoute29Reward = true;
+            Logging.UpdateLogContent($"Vistited {MapBank.Neuborkia} {NeuborkiaMapNumber.Route29} first time and got {DefaultReward} reward points");
             return DefaultReward;
         }
 
@@ -214,6 +221,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.ProfHouse && _gotNeuborkiaProfReward is false)
         {
             _gotNeuborkiaProfReward = true;
+            Logging.UpdateLogContent($"Vistited {MapBank.Neuborkia} {NeuborkiaMapNumber.ProfHouse} first time and got {DefaultReward} reward points");
             return DefaultReward;
         }
 
@@ -225,6 +233,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaOutsideReward is false)
         {
             _gotNeuborkiaOutsideReward = true;
+            Logging.UpdateLogContent($"Vistited {MapBank.Neuborkia} {NeuborkiaMapNumber.Outside} first time and got {DefaultReward} reward points");
             return DefaultReward;
         }
 
@@ -236,6 +245,7 @@ public class RewardManager
         if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.LivingRoom && _gotNeuborkiaLivingRoomReward is false)
         {
             _gotNeuborkiaLivingRoomReward = true;
+            Logging.UpdateLogContent($"Vistited {MapBank.Neuborkia} {NeuborkiaMapNumber.LivingRoom} first time and got {DefaultReward} reward points");
             return DefaultReward;
         }
 
