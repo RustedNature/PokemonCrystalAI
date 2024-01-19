@@ -19,7 +19,6 @@ class Program
     private static torch.Tensor? tensorImageCurrent = null;
     private static int epoch = 0;
     private static Process? pyBoyProcess;
-    private const int BatchSize = 4;
 
     private static void Main()
     {
@@ -83,7 +82,6 @@ class Program
             }
         }
     }
-
     private static void PredictOnly()
     {
         SetupPreRequirements(
@@ -142,6 +140,8 @@ class Program
             {
                 agent.SetMinEpsilon(0.01f);
             }
+
+            Console.WriteLine(++epoch);
             if (epoch % 100_000 == 0)
             {
                 pipeServer.SendReset(1);
@@ -208,7 +208,7 @@ class Program
             torchvision.transforms.CenterCrop(144, 144),
                 torchvision.transforms.ConvertImageDtype(dtype: torch.float32),
 
-        ]);
+            ]);
         return transform.call(torch.tensor(stateImage).view(3, 160, 144).cuda()) / 255;
     }
 
