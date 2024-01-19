@@ -4,7 +4,6 @@ from PyPipeClient import PyPipeClient
 from MemoryValue import MemoryValue
 from MemoryAddresses import MemoryAddresses
 from pyboy import PyBoy, WindowEvent
-from io import BytesIO
 
 
 
@@ -96,7 +95,7 @@ if __name__ == "__main__":
                 pyboy.load_state(state_file)
             while True:
                 pyboy.tick()
-                if pyboy.frame_count % 5 == 0:
+                if pyboy.frame_count % 4 == 0:
                     read_memory()
                     pipe.send_image_to_cs(convert_image_to_bytes())
                     pipe.send_mem_vals_to_cs(get_encoded_mem_vals())
