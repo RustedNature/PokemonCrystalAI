@@ -107,9 +107,17 @@ class Program
             out PipeServer pipeServer,
             batchSize: BatchSize,
             epsilonDecay: 0.9995f);
+        Logging.UpdateLogContent(":::::::::::::::::::::::::::::::NEW CYCLE:::::::::::::::::::::::::::::::::::");
         bool restart = false;
+        bool logNewRun = true;
+        int run = 1;
         while (restart is false)
         {
+            if (logNewRun)
+            {
+                Logging.UpdateLogContent("START RUN", run);
+                logNewRun = false;
+            }
             restart = false;
             var tensorImageBefore = tensorImageCurrent;
             var byteImageCurrent = GetCurrentImageAsBytes(pipeServer);
@@ -134,12 +142,20 @@ class Program
             {
                 pipeServer.SendReset(1);
                 rewardManager.ResetRewards();
+                logNewRun = true;
+                ++run;
+                Logging.UpdateLogContent("END OF RUN");
             }
             else
             {
                 pipeServer.SendReset(0);
             }
 
+            if (epoch % 1_000 == 0)
+            {
+                agent.SaveModel();
+                Logging.WriteToFile();
+            }
 
         }
     }
