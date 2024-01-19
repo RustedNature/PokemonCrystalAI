@@ -12,7 +12,10 @@ namespace PokeTorchAi;
 
 class Program
 {
+    private const float MinEpsilon = 0.1f;
     private const int NumActions = 8;
+    private const float EpsilonDecay = 0.000018f;
+    private const int BatchSize = 4;
     private static torch.Tensor? tensorImageCurrent = null;
     private static int epoch = 0;
     private static Process? pyBoyProcess;
@@ -106,7 +109,9 @@ class Program
             out Agent agent,
             out PipeServer pipeServer,
             batchSize: BatchSize,
-            epsilonDecay: 0.9995f);
+            epsilonDecay: EpsilonDecay,
+            minEpsilon: MinEpsilon
+            );
         Logging.UpdateLogContent(":::::::::::::::::::::::::::::::NEW CYCLE:::::::::::::::::::::::::::::::::::");
         bool restart = false;
         bool logNewRun = true;
@@ -162,11 +167,11 @@ class Program
         }
     }
 
-    private static void SetupPreRequirements(out RewardManager rewardManager, out Agent agent, out PipeServer pipeServer, int batchSize = 8, float epsilonDecay = 0.995f)
+    private static void SetupPreRequirements(out RewardManager rewardManager, out Agent agent, out PipeServer pipeServer, int batchSize = 8, float epsilonDecay = 0.995f, float minEpsilon = 0.01f)
     {
         rewardManager = new RewardManager();
         agent = new Agent(NumActions, batchSize: batchSize, discountFactor: 0.99f, epsilon: 1.0f, epsilonDecay: epsilonDecay,
-                    minEpsilon: 0.01f);
+                    minEpsilon: minEpsilon);
         if (agent.LoadModel())
         {
             Console.WriteLine("Existing model loaded");
