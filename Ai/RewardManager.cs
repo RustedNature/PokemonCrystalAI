@@ -211,7 +211,7 @@ public class RewardManager
 
     private float NeuborkiaProfHouseReward()
     {
-        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.Outside && _gotNeuborkiaProfReward is false)
+        if (_mapBank == (int)MapBank.Neuborkia && _mapNumber == (int)NeuborkiaMapNumber.ProfHouse && _gotNeuborkiaProfReward is false)
         {
             _gotNeuborkiaProfReward = true;
             return DefaultReward;
