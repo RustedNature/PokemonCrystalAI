@@ -26,7 +26,7 @@ public class Agent(
     public long SelectAction(torch.Tensor stateImage)
     {
         long action;
-        if (Rng.NextDouble() > epsilon)
+        if (torch.rand_float() > _epsilon)
         {
             _model.eval();
             var withNoGrad = torch.no_grad();
@@ -38,7 +38,7 @@ public class Agent(
         }
         else
         {
-            action = Rng.Next(0, numActions);
+            action = torch.randint_int(0, _numActions);
             Console.WriteLine("RANDOM");
         }
 
