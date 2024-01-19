@@ -128,7 +128,7 @@ class Program
             var lastMovement = agent.SelectAction(tensorImageCurrent);
             pipeServer.SendMovementData(lastMovement);
 
-            if (tensorImageBefore is not null)
+            if (tensorImageBefore is not null && (epoch % 100_000) != 0)
             {
                 agent.UpdateExperienceMemory(tensorImageBefore!, (int)lastMovement, rewardManager.GetReward(), tensorImageCurrent);
                 agent.UpdateModel();
@@ -142,7 +142,9 @@ class Program
             {
                 pipeServer.SendReset(1);
                 rewardManager.ResetRewards();
+                agent.SetEpsilon(1);
                 logNewRun = true;
+                tensorImageCurrent = null;
                 ++run;
                 Logging.UpdateLogContent("END OF RUN");
             }
