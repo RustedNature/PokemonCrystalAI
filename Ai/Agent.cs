@@ -134,4 +134,14 @@ public class Agent(
         _targetModel.load(fs2);
         return true;
     }
+
+    internal void SetMinEpsilon(float minEpsilon)
+    {
+        _minEpsilon = minEpsilon;
+    }
+
+    internal void SetEpsilon(float epsilon)
+    {
+        _epsilon = epsilon;
+    }
 }
