@@ -138,10 +138,9 @@ class Program
                 agent.UpdateExperienceMemory(tensorImageBefore!, (int)lastMovement, rewardManager.GetReward(), tensorImageCurrent);
                 agent.UpdateModel();
             }
-            Console.WriteLine(++epoch);
-            if (epoch % 1_000 == 0)
+            if (epoch == 80_000)
             {
-                agent.SaveModel();
+                agent.SetMinEpsilon(0.01f);
             }
             if (epoch % 100_000 == 0)
             {
