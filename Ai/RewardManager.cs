@@ -152,32 +152,32 @@ public class RewardManager
         float sum = 0;
         if (_numberOfPokemonInTeam == 0) return sum;
 
-        if (_currentLevelOfPokemon1 > _lastLevelOfPokemon1 && _currentLevelOfPokemon1 <= MaxPokemonLevel)
+        if (_currentLevelOfPokemon1 > _lastLevelOfPokemon1 && _currentLevelOfPokemon1 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 1 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon1 = _currentLevelOfPokemon1;
             sum += _currentLevelOfPokemon1;
         }
-        if (_currentLevelOfPokemon2 > _lastLevelOfPokemon2 && _currentLevelOfPokemon2 <= MaxPokemonLevel)
+        if (_currentLevelOfPokemon2 > _lastLevelOfPokemon2 && _currentLevelOfPokemon2 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 2 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon2 = _currentLevelOfPokemon2;
             sum += _currentLevelOfPokemon2;
         }
-        if (_currentLevelOfPokemon3 > _lastLevelOfPokemon3 && _currentLevelOfPokemon3 <= MaxPokemonLevel)
+        if (_currentLevelOfPokemon3 > _lastLevelOfPokemon3 && _currentLevelOfPokemon3 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 3 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon3 = _currentLevelOfPokemon3;
             sum += _currentLevelOfPokemon3;
         }
-        if (_currentLevelOfPokemon4 > _lastLevelOfPokemon4 && _currentLevelOfPokemon4 <= MaxPokemonLevel)
+        if (_currentLevelOfPokemon4 > _lastLevelOfPokemon4 && _currentLevelOfPokemon4 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 4 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon4 = _currentLevelOfPokemon4;
             sum += _currentLevelOfPokemon4;
         }
-        if (_currentLevelOfPokemon5 > _lastLevelOfPokemon5 && _currentLevelOfPokemon5 <= MaxPokemonLevel)
+        if (_currentLevelOfPokemon5 > _lastLevelOfPokemon5 && _currentLevelOfPokemon5 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 5 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon5 = _currentLevelOfPokemon5;
             sum += _currentLevelOfPokemon5;
         }
-        if (_currentLevelOfPokemon6 > _lastLevelOfPokemon6 && _currentLevelOfPokemon6 <= MaxPokemonLevel)
+        if (_currentLevelOfPokemon6 > _lastLevelOfPokemon6 && _currentLevelOfPokemon6 <= MaxPokemonLevel && _numberOfPokemonInTeam >= 6 && _numberOfPokemonInTeam <= 6)
         {
             _lastLevelOfPokemon6 = _currentLevelOfPokemon6;
             sum += _currentLevelOfPokemon6;
