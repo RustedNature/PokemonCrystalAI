@@ -1,3 +1,6 @@
+#Switched to python and baselines3 because its easier for me
+ [NewRepo](https://github.com/RustedNature/PokemonCrystalAIPy)
+
 # Welcome on my PokeAi page.
 I've grown up with Pokemon the second Gen, in my memories it was one   
 of the first games I've ever played, so my choice is Pokemon Crystal as candidate for to be Played on an AI.  
